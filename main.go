@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
-	"strings"
 
 	"github.com/joho/godotenv"
 )
@@ -19,12 +17,6 @@ func init() {
 }
 
 func main() {
-	// cmdStruct := exec.Command("ls")
-	// out, err := cmdStruct.Output()
-	// if err != nil {
-	// 	fmt.Println(err)
-	// }
-	// fmt.Println(string(out))
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("How can I assist you?")
 	for {
@@ -35,16 +27,6 @@ func main() {
 			fmt.Println("There was an error with the response")
 			return
 		}
-		fmt.Print(response)
-		commands := strings.Split(response, "~~")
-		for _, command := range commands {
-			cmdStruct := exec.Command("bash", "-c", command)
-			out, err := cmdStruct.Output()
-			if err != nil {
-				fmt.Println(err)
-			}
-			fmt.Println(string(out))
-		}
-		fmt.Print(response)
+		parseAndRunResponse(response)
 	}
 }
