@@ -21,12 +21,16 @@ func main() {
 	fmt.Println("How can I assist you?")
 	for {
 		text, _ := reader.ReadString('\n')
-		text, _ = modifyPrompt(text)
+
+		context, err := prompter(contextPrompt(text))
+		fmt.Println(context)
+		text, _ = modifyPrompt(text, context)
 		response, err := prompter(text)
 		if err != nil {
 			fmt.Println("There was an error with the response")
 			return
 		}
 		parseAndRunResponse(response)
+		fmt.Println("Commands Executed Successfully")
 	}
 }

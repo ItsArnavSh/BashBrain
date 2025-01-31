@@ -37,7 +37,6 @@ func parseAndRunResponse(response string) {
 				os.Exit(0)
 			}
 		}
-		fmt.Println(cmd.Command)
 		cmdStruct := exec.Command("bash", "-c", cmd.Command)
 		out, err := cmdStruct.Output()
 		if err != nil {
